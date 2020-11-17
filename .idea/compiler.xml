@@ -6,10 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="server-AdPic" />
         <module name="eureka-server" />
         <module name="getway-server" />
-        <module name="PROJECT-PARENT" />
+        <module name="common-resources" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common-resources" options="-parameters" />
+      <module name="server-AdPic" options="-parameters" />
+    </option>
   </component>
 </project>

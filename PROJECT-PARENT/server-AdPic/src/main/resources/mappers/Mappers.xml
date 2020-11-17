@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.ad.mapper.ad_mapper">
+    <select id="getAds" resultType="cn.tedu.util.AdDomain" >
+        select * from ad_db
+    </select>
+    <update id="changeAdsByid">
+        update ad_db set AdPicUri=#{adPicUri} ,AdUri=#{adUri} where id=#{id}
+    </update>
+    <insert id="insertAds">
+        insert into ad_db values (null,#{str1},#{str2})
+    </insert>
+    <delete id="deleteById">
+        delete  from ad_db where id=#{id}
+    </delete>
+</mapper>
