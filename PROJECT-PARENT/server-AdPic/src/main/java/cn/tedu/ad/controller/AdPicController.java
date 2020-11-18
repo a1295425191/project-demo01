@@ -6,6 +6,7 @@ import cn.tedu.util.AdDomain;
 import cn.tedu.util.SysResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ public class AdPicController {
     /**
      *
      */
+    @CrossOrigin
     @RequestMapping("/getAds")
     public List<AdDomain> getAds(){
         List<AdDomain> ads = adService.getAds();
@@ -29,6 +31,7 @@ public class AdPicController {
     /**
      *
      */
+    @CrossOrigin
     @RequestMapping("/changeAds")
     public SysResult changeAds(AdDomain adDomain){
         try{
@@ -42,10 +45,11 @@ public class AdPicController {
     /**
      *
      */
+    @CrossOrigin
     @RequestMapping("/addAds")
     public SysResult addAds(AdDomain adDomain){
         try{
-            System.out.println(adDomain);
+
             adService.addAds(adDomain);
             return SysResult.ok();
         }catch (Exception e){
@@ -56,6 +60,7 @@ public class AdPicController {
     /**
      *
      */
+    @CrossOrigin
     @RequestMapping("/delAds")
     public SysResult delAds(int id){
         try{
