@@ -3,12 +3,14 @@ package cn.tedu.ad.controller;
 import cn.tedu.ad.service.AdService;
 import cn.tedu.ad.service.ad_Service;
 import cn.tedu.util.AdDomain;
+import cn.tedu.util.PicUploadResult;
 import cn.tedu.util.SysResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class AdPicController {
     AdService adService;
 
     /**
-     *
+     *获取
      */
     @CrossOrigin
     @RequestMapping("/getAds")
@@ -34,13 +36,18 @@ public class AdPicController {
     @CrossOrigin
     @RequestMapping("/changeAds")
     public SysResult changeAds(AdDomain adDomain){
-        try{
-            adService.changeAds(adDomain);
-            return SysResult.ok();
-        }catch (Exception e){
-            e.printStackTrace();
-            return SysResult.build(000000,"修改错误",null);
+        if(adDomain.getAdUri().equals("")||adDomain.getAdPicUri().equals("")){
+            return SysResult.build(000000,"不能为空",null);
+        }else{
+            try{
+                adService.changeAds(adDomain);
+                return SysResult.ok();
+            }catch (Exception e){
+                e.printStackTrace();
+                return SysResult.build(000000,"修改错误",null);
+            }
         }
+
     }
     /**
      *
@@ -48,14 +55,18 @@ public class AdPicController {
     @CrossOrigin
     @RequestMapping("/addAds")
     public SysResult addAds(AdDomain adDomain){
-        try{
-
-            adService.addAds(adDomain);
-            return SysResult.ok();
-        }catch (Exception e){
-            e.printStackTrace();
-            return SysResult.build(123123123,"插入失败",null);
+        if(adDomain.getAdUri().equals("")||adDomain.getAdPicUri().equals("")){
+            return SysResult.build(000000,"不能为空",null);
+        }else {
+            try{
+                adService.addAds(adDomain);
+                return SysResult.ok();
+            }catch (Exception e){
+                e.printStackTrace();
+                return SysResult.build(123123123,"插入失败",null);
+            }
         }
+
     }
     /**
      *
@@ -70,6 +81,11 @@ public class AdPicController {
             e.printStackTrace();
             return SysResult.build(12121,"删除失败",null);
         }
+    }
+    @CrossOrigin
+    @RequestMapping("/uploadPic")
+    public PicUploadResult picUpload(MultipartFile pic){
+        return adService.picUpload(pic);
     }
 
 
